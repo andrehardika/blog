@@ -11,8 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['web']], function (){
+	Route::get('/', function () {
+		return view('welcome');
+	});
+
+	Route::resource('articles','ArticlesController');
+
+	Route::post('articles/{article}/comments', 'CommentsController@store');
 });
 
-Route::resource('articles','ArticlesController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

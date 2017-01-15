@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Auth;
 
-use Illuminate\Http\Request;
 use App\Article;
+use App\Comment;
 
-class ArticlesController extends Controller
+use Illuminate\Http\Request;
+
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +18,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
-        return view('articles.index', compact('articles'));
+        //
     }
 
     /**
@@ -27,7 +28,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        //
     }
 
     /**
@@ -36,17 +37,17 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Article $article)
     {
         $this->validate($request, [
-            'title' => 'required|min:10|max:100'
+          'body' => 'required'
         ]);
 
-        $article = $request->all();
-        $article['user_id'] = Auth::user()->id;
+        $comment = new Comment($request->all());
 
-        Article::create($article);
-        return redirect('articles');
+        $article->addComment($comment, Auth::user()->id);
+
+        return back();
     }
 
     /**
@@ -55,11 +56,9 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        $article->load('comments.user');
-
-        return view('articles.show', compact('article'));
+        //
     }
 
     /**
@@ -68,9 +67,9 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit($id)
     {
-        return view('articles.edit', compact('article'));
+        //
     }
 
     /**
@@ -80,11 +79,9 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, $id)
     {
-        $article->update($request->all());
-
-        return redirect('articles');
+        //
     }
 
     /**
@@ -93,9 +90,8 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        $article->delete();
-        return back();
+        //
     }
 }

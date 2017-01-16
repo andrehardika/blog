@@ -24,15 +24,11 @@
 			<td>
 				<a href="{{ url('articles/'.$article->id) }}" class="btn btn-default">Detail</a>
 				<a href="{{ url('articles/'.$article->id.'/edit') }}" class="btn btn-warning">Edit</a>
-				<form method="POST" action="{{ url('articles/'.$article->id) }}">
-					{{ method_field('DELETE') }}
-					{{ csrf_field() }}
-					<button class="btn btn-danger">Delete</button>
-				</form>
-				</td>
-			</tr>
-			@endforeach
-		</tbody>
-	</table>
+				<button class="btn btn-danger" data-token="{{ csrf_token() }}" onclick="delete_article({{ $article->id }})" id="delete">Delete</button>
+			</td>
+		</tr>
+		@endforeach
+	</tbody>
+</table>
 
-	@stop
+@stop

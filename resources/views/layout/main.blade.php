@@ -14,6 +14,7 @@
 
 	<script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('bootstrap/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
 	@yield('footer')
 </body>
 </html>

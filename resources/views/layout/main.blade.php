@@ -3,18 +3,17 @@
 <head>
 	<title>@yield('title')</title>
 
-	<link rel="stylesheet" type="text/css" href="{{ URL::asset('bootstrap/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ elixir('css/app.css') }}">
 	@yield('header')
 </head>
 <body>
 
-	<div class="container">
+	<div class="container" id="app">
 		@yield('content')		
 	</div>
 
-	<script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>
-	<script type="text/javascript" src="{{ URL::asset('bootstrap/js/bootstrap.min.js') }}"></script>
-	<script type="text/javascript" src="{{ URL::asset('js/custom.js') }}"></script>
+	<script type="text/javascript" src="{{ elixir('js/app.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('js/article.js') }}"></script>
 	@yield('footer')
 </body>
 </html>
